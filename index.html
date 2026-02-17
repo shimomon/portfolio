@@ -282,8 +282,6 @@
     .hero-bg {
       position: absolute;
       inset: 0;
-      /* IMAGE: Replace with actual hero background image
-         Example: background: url('assets/images/hero-bg.jpg') center/cover no-repeat; */
       background:
         radial-gradient(ellipse 80% 60% at 20% 50%, rgba(201, 168, 76, 0.06) 0%, transparent 70%),
         radial-gradient(ellipse 60% 80% at 80% 30%, rgba(201, 168, 76, 0.04) 0%, transparent 60%),
@@ -473,10 +471,7 @@
       aspect-ratio: 3/4;
       border-radius: 4px;
       overflow: hidden;
-      /* IMAGE: Replace with actual profile photo
-         Example: background: url('assets/images/profile.jpg') center/cover no-repeat; */
-      background:
-        linear-gradient(135deg, var(--charcoal-light) 0%, var(--black) 50%, var(--charcoal-light) 100%);
+      background: url('https://prcdn.freetls.fastly.net/release_image/89789/12/89789-12-f297d8707966497cebd3fa1d421cde67-2115x2115.jpg') center top/cover no-repeat;
     }
 
     .profile-photo::before {
@@ -484,14 +479,14 @@
       position: absolute;
       inset: 0;
       background:
-        radial-gradient(circle at 40% 40%, rgba(201, 168, 76, 0.08), transparent 60%);
+        radial-gradient(circle at 40% 40%, rgba(201, 168, 76, 0.05), transparent 60%);
     }
 
     .profile-photo::after {
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(180deg, transparent 0%, rgba(10, 10, 10, 0.4) 100%);
+      background: linear-gradient(180deg, transparent 60%, rgba(10, 10, 10, 0.5) 100%);
       pointer-events: none;
     }
 
@@ -680,41 +675,40 @@
       overflow: hidden;
     }
 
-    /* IMAGE: Replace each .case-visual-N with actual project images
-       Example: .case-visual-1 { background: url('assets/images/case-01.jpg') center/cover; } */
     .case-visual-1 {
-      background: linear-gradient(135deg, #1a1510 0%, #2a2015 30%, #1a1510 60%, #0f0d0a 100%);
+      background: url('https://prcdn.freetls.fastly.net/release_image/89789/7/89789-7-7d56ff2039a658882f2817b986997819-2048x1365.jpg') center/cover no-repeat;
     }
 
     .case-visual-2 {
-      background: linear-gradient(135deg, #0f1015 0%, #151a25 30%, #0f1015 60%, #0a0a0f 100%);
+      background: url('https://prd.storage.lit.link/images/creators/bb8b1f5d-ad90-49c4-9bd8-46b3203835a5/01fd47df-b3c9-4bc7-9c19-cd6397fb02c0.png') center/cover no-repeat;
     }
 
     .case-visual-3 {
-      background: linear-gradient(135deg, #101510 0%, #152015 30%, #101510 60%, #0a0f0a 100%);
+      background: url('https://prcdn.freetls.fastly.net/release_image/111738/20/111738-20-06b8c16154198183b739a206a1ebff95-1600x900.png') center/cover no-repeat;
     }
 
     .case-visual-4 {
-      background: linear-gradient(135deg, #15100f 0%, #251a15 30%, #15100f 60%, #0f0a0a 100%);
+      background: url('https://prcdn.freetls.fastly.net/release_image/89789/7/89789-7-32a63ea0337f2e74b98caa280244c6eb-1104x982.jpg') center/cover no-repeat;
     }
 
     .case-visual::before {
       content: '';
       position: absolute;
       inset: 0;
-      background: radial-gradient(circle at 50% 50%, rgba(201, 168, 76, 0.06), transparent 70%);
+      background: linear-gradient(180deg, transparent 40%, rgba(10, 10, 10, 0.6) 100%);
+      z-index: 1;
     }
 
     .case-visual::after {
       content: attr(data-label);
       position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
+      bottom: 16px;
+      left: 16px;
+      z-index: 2;
       font-family: var(--font-mono);
       font-size: 0.55rem;
-      letter-spacing: 0.3em;
-      color: rgba(201, 168, 76, 0.15);
+      letter-spacing: 0.2em;
+      color: rgba(240, 236, 228, 0.5);
       text-transform: uppercase;
       white-space: nowrap;
     }
@@ -860,21 +854,21 @@
       color: var(--off-white);
     }
 
-    /* Additional case visual gradients */
     .case-visual-5 {
       background: linear-gradient(135deg, #15130f 0%, #252015 30%, #15130f 60%, #0f0d0a 100%);
+      /* CoinOtaku — ロゴのみのため、グラデーション維持。assets/images/case-05.jpg で差し替え可 */
     }
 
     .case-visual-6 {
-      background: linear-gradient(135deg, #0f0f15 0%, #15152a 30%, #0f0f15 60%, #0a0a0f 100%);
+      background: url('https://prcdn.freetls.fastly.net/release_image/89789/15/89789-15-1697d220a493a0b4bea1e36665e3acb5-1980x1320.png') center/cover no-repeat;
     }
 
     .case-visual-7 {
-      background: linear-gradient(135deg, #151010 0%, #2a1515 30%, #151010 60%, #0f0a0a 100%);
+      background: url('https://prcdn.freetls.fastly.net/release_image/89789/12/89789-12-2d3f30eab49c18e349ffdf4a2956b5d1-1920x1080.png') center/cover no-repeat;
     }
 
     .case-visual-8 {
-      background: linear-gradient(135deg, #0f1510 0%, #15251a 30%, #0f1510 60%, #0a0f0a 100%);
+      background: url('https://prcdn.freetls.fastly.net/release_image/89789/9/89789-9-8c87ab33f99ce41f8887f606e312e215-3900x2925.jpg') center/cover no-repeat;
     }
 
     /* ============================================
@@ -1336,7 +1330,6 @@
           </div>
         </div>
 
-        <!-- IMAGE: Replace div below with <img src="assets/images/profile.jpg" alt="下山明彦"> -->
         <div class="profile-photo reveal reveal-delay-2" role="img" aria-label="下山明彦 プロフィール写真"></div>
       </div>
 
@@ -1433,7 +1426,7 @@
 
       <!-- Case 01: 万博 -->
       <div class="case-item reveal" data-case>
-        <!-- IMAGE: Replace with actual project image -->
+
         <div class="case-visual case-visual-1" data-label="Expo 2025 Osaka"></div>
         <div class="case-info">
           <span class="case-number">Case 01 — Art</span>
@@ -1473,7 +1466,7 @@
 
       <!-- Case 02: 経産省 -->
       <div class="case-item reveal" data-case>
-        <!-- IMAGE: Replace with actual project image -->
+
         <div class="case-visual case-visual-2" data-label="METI Art Thinking"></div>
         <div class="case-info">
           <span class="case-number">Case 02 — Art × Policy</span>
@@ -1513,7 +1506,7 @@
 
       <!-- Case 03: 西川町 -->
       <div class="case-item reveal" data-case>
-        <!-- IMAGE: Replace with actual project image -->
+
         <div class="case-visual case-visual-3" data-label="Nishikawa Kyokan"></div>
         <div class="case-info">
           <span class="case-number">Case 03 — Art × Local</span>
@@ -1553,7 +1546,7 @@
 
       <!-- Case 04: 日ASEAN -->
       <div class="case-item reveal" data-case>
-        <!-- IMAGE: Replace with actual project image -->
+
         <div class="case-visual case-visual-4" data-label="Japan-ASEAN Summit"></div>
         <div class="case-info">
           <span class="case-number">Case 04 — Art × Diplomacy</span>
@@ -1593,7 +1586,7 @@
 
       <!-- Case 05: CoinOtaku EXIT -->
       <div class="case-item reveal" data-case>
-        <!-- IMAGE: Replace with actual project image -->
+
         <div class="case-visual case-visual-5" data-label="CoinOtaku EXIT"></div>
         <div class="case-info">
           <span class="case-number">Case 05 — Business</span>
@@ -1636,7 +1629,7 @@
 
       <!-- Case 06: Senjin Holdings -->
       <div class="case-item reveal" data-case>
-        <!-- IMAGE: Replace with actual project image -->
+
         <div class="case-visual case-visual-6" data-label="Senjin Holdings"></div>
         <div class="case-info">
           <span class="case-number">Case 06 — Business</span>
@@ -1691,7 +1684,7 @@
 
       <!-- Case 07: Forbes 30 UNDER 30 -->
       <div class="case-item reveal" data-case>
-        <!-- IMAGE: Replace with actual project image -->
+
         <div class="case-visual case-visual-7" data-label="Forbes 30 Under 30"></div>
         <div class="case-info">
           <span class="case-number">Case 07 — Recognition</span>
@@ -1734,7 +1727,7 @@
 
       <!-- Case 08: 地方創生拠点 -->
       <div class="case-item reveal" data-case>
-        <!-- IMAGE: Replace with actual project image -->
+
         <div class="case-visual case-visual-8" data-label="Regional Expansion"></div>
         <div class="case-info">
           <span class="case-number">Case 08 — Local × Business</span>
@@ -1906,48 +1899,48 @@
       </div>
 
       <div class="contact-grid">
-        <a href="mailto:hello@example.com?subject=Business%20Partnership" class="contact-card reveal reveal-delay-1">
-          <!-- EMAIL: Replace hello@example.com with actual email address -->
+        <a href="mailto:akihiko.shimoyama@senjinholdings.com?subject=Business%20Partnership" class="contact-card reveal reveal-delay-1">
+
           <div class="contact-card-icon">◇</div>
           <h3 class="contact-card-title">Business</h3>
           <p class="contact-card-desc">事業提携・協業・戦略顧問のご相談</p>
           <span class="contact-card-cta">Get in Touch →</span>
         </a>
 
-        <a href="mailto:hello@example.com?subject=Art%20Commission" class="contact-card reveal reveal-delay-2">
-          <!-- EMAIL: Replace hello@example.com with actual email address -->
+        <a href="mailto:akihiko.shimoyama@senjinholdings.com?subject=Art%20Commission" class="contact-card reveal reveal-delay-2">
+
           <div class="contact-card-icon">△</div>
           <h3 class="contact-card-title">Art Commission</h3>
           <p class="contact-card-desc">アート制作・空間演出・展示のご依頼</p>
           <span class="contact-card-cta">Get in Touch →</span>
         </a>
 
-        <a href="mailto:hello@example.com?subject=Advisory%20%2F%20Mentoring" class="contact-card reveal reveal-delay-3">
-          <!-- EMAIL: Replace hello@example.com with actual email address -->
+        <a href="mailto:akihiko.shimoyama@senjinholdings.com?subject=Advisory%20%2F%20Mentoring" class="contact-card reveal reveal-delay-3">
+
           <div class="contact-card-icon">⬡</div>
           <h3 class="contact-card-title">Advisory</h3>
           <p class="contact-card-desc">キャリア相談・越境戦略・専門性の掛け算についてのディスカッション</p>
           <span class="contact-card-cta">Book a Session →</span>
         </a>
 
-        <a href="mailto:hello@example.com?subject=Investment%20Inquiry" class="contact-card reveal reveal-delay-1">
-          <!-- EMAIL: Replace hello@example.com with actual email address -->
+        <a href="mailto:akihiko.shimoyama@senjinholdings.com?subject=Investment%20Inquiry" class="contact-card reveal reveal-delay-1">
+
           <div class="contact-card-icon">○</div>
           <h3 class="contact-card-title">Investment</h3>
           <p class="contact-card-desc">出資・資金調達・M&Aのご相談</p>
           <span class="contact-card-cta">Get in Touch →</span>
         </a>
 
-        <a href="mailto:hello@example.com?subject=Speaking%20%2F%20Media" class="contact-card reveal reveal-delay-2">
-          <!-- EMAIL: Replace hello@example.com with actual email address -->
+        <a href="mailto:akihiko.shimoyama@senjinholdings.com?subject=Speaking%20%2F%20Media" class="contact-card reveal reveal-delay-2">
+
           <div class="contact-card-icon">▽</div>
           <h3 class="contact-card-title">Speaking / Media</h3>
           <p class="contact-card-desc">講演・登壇・取材・対談のご依頼</p>
           <span class="contact-card-cta">Get in Touch →</span>
         </a>
 
-        <a href="mailto:hello@example.com?subject=Career%20Inquiry" class="contact-card reveal reveal-delay-3">
-          <!-- EMAIL: Replace hello@example.com with actual email address -->
+        <a href="mailto:akihiko.shimoyama@senjinholdings.com?subject=Career%20Inquiry" class="contact-card reveal reveal-delay-3">
+
           <div class="contact-card-icon">□</div>
           <h3 class="contact-card-title">Careers</h3>
           <p class="contact-card-desc">Senjin Holdingsへの参画・採用</p>
