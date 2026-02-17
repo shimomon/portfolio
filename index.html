@@ -1,0 +1,2111 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="description" content="下山明彦 — ビジネス・アート・哲学を横断し、思想を社会に実装する。Senjin Holdings代表、大阪万博・経産省・地方創生など国家規模のプロジェクトを手がける。">
+  <meta property="og:title" content="Akihiko Shimoyama — Sculpting the Society.">
+  <meta property="og:description" content="下山明彦 — ビジネス・アート・哲学を横断し、思想を社会に実装する。Senjin Holdings代表、大阪万博・経産省・地方創生など国家規模のプロジェクトを手がける。">
+  <meta property="og:type" content="website">
+  <title>Akihiko Shimoyama — Sculpting the Society.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    /* ============================================
+       CSS RESET & CUSTOM PROPERTIES
+       ============================================ */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --black: #0a0a0a;
+      --charcoal: #111111;
+      --charcoal-light: #1a1a1a;
+      --gold: #c9a84c;
+      --gold-dim: rgba(201, 168, 76, 0.3);
+      --gold-glow: rgba(201, 168, 76, 0.08);
+      --off-white: #f0ece4;
+      --off-white-dim: rgba(240, 236, 228, 0.6);
+      --off-white-muted: rgba(240, 236, 228, 0.4);
+
+      --font-display: 'Cormorant Garamond', serif;
+      --font-body: 'Noto Sans JP', sans-serif;
+      --font-mono: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+
+      --nav-height: 64px;
+      --section-pad: clamp(80px, 12vh, 160px);
+      --content-max: 1200px;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      font-family: var(--font-body);
+      font-weight: 300;
+      background: var(--black);
+      color: var(--off-white);
+      line-height: 1.8;
+      overflow-x: hidden;
+    }
+
+    body.menu-open {
+      overflow: hidden;
+      position: fixed;
+      width: 100%;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    a:focus-visible,
+    .hamburger:focus-visible {
+      outline: 2px solid var(--gold);
+      outline-offset: 4px;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    /* ============================================
+       TYPOGRAPHY
+       ============================================ */
+    .heading-xl {
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: clamp(2.4rem, 6vw, 5.5rem);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+    }
+
+    .heading-lg {
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: clamp(1.8rem, 4vw, 3.2rem);
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+    }
+
+    .heading-md {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: clamp(1.4rem, 2.5vw, 2rem);
+      line-height: 1.3;
+    }
+
+    .label {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .body-text {
+      font-size: 0.95rem;
+      color: var(--off-white-dim);
+      max-width: 640px;
+    }
+
+    /* ============================================
+       SECTION COMMONS
+       ============================================ */
+    .section {
+      padding: var(--section-pad) 0;
+      position: relative;
+    }
+
+    .container {
+      max-width: var(--content-max);
+      margin: 0 auto;
+      padding: 0 clamp(24px, 5vw, 48px);
+    }
+
+    .gold-line {
+      width: 48px;
+      height: 1px;
+      background: var(--gold);
+      margin: 24px 0;
+    }
+
+    .section-header {
+      margin-bottom: 64px;
+    }
+
+    /* ============================================
+       SCROLL ANIMATIONS
+       ============================================ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                  transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    /* ============================================
+       NAVIGATION
+       ============================================ */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: var(--nav-height);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 clamp(24px, 5vw, 48px);
+      transition: background 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .nav.scrolled {
+      background: rgba(10, 10, 10, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 1px 0 rgba(201, 168, 76, 0.1);
+    }
+
+    .nav-logo {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 400;
+      letter-spacing: 0.05em;
+      color: var(--off-white);
+    }
+
+    .nav-logo span {
+      color: var(--gold);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--off-white-muted);
+      transition: color 0.3s ease;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--gold);
+      transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--gold);
+    }
+
+    .nav-links a:hover::after,
+    .nav-links a.active::after {
+      width: 100%;
+    }
+
+    /* Hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 8px;
+      z-index: 1001;
+    }
+
+    .hamburger span {
+      width: 24px;
+      height: 1px;
+      background: var(--off-white);
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    .hamburger.open span:nth-child(1) {
+      transform: translateY(6px) rotate(45deg);
+    }
+
+    .hamburger.open span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger.open span:nth-child(3) {
+      transform: translateY(-6px) rotate(-45deg);
+    }
+
+    /* ============================================
+       HERO
+       ============================================ */
+    .hero {
+      position: relative;
+      height: 100vh;
+      min-height: 600px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      /* IMAGE: Replace with actual hero background image
+         Example: background: url('assets/images/hero-bg.jpg') center/cover no-repeat; */
+      background:
+        radial-gradient(ellipse 80% 60% at 20% 50%, rgba(201, 168, 76, 0.06) 0%, transparent 70%),
+        radial-gradient(ellipse 60% 80% at 80% 30%, rgba(201, 168, 76, 0.04) 0%, transparent 60%),
+        radial-gradient(circle at 50% 100%, rgba(17, 17, 17, 1) 0%, transparent 60%),
+        linear-gradient(180deg, var(--black) 0%, var(--charcoal) 100%);
+    }
+
+    .hero-bg::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        repeating-linear-gradient(
+          0deg,
+          transparent,
+          transparent 100px,
+          rgba(201, 168, 76, 0.03) 100px,
+          rgba(201, 168, 76, 0.03) 101px
+        ),
+        repeating-linear-gradient(
+          90deg,
+          transparent,
+          transparent 100px,
+          rgba(201, 168, 76, 0.03) 100px,
+          rgba(201, 168, 76, 0.03) 101px
+        );
+    }
+
+    .hero-content {
+      position: relative;
+      text-align: center;
+      padding: 0 24px;
+    }
+
+    .hero-label {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 24px;
+      opacity: 0;
+      animation: fadeUp 1s 0.3s forwards;
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: clamp(2.6rem, 7vw, 6rem);
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      color: var(--off-white);
+      margin-bottom: 8px;
+      opacity: 0;
+      animation: fadeUp 1s 0.5s forwards;
+    }
+
+    .hero-title em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    .hero-subtitle {
+      font-family: var(--font-display);
+      font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--off-white-muted);
+      margin-bottom: 32px;
+      opacity: 0;
+      animation: fadeUp 1s 0.7s forwards;
+    }
+
+    .hero-gold-line {
+      width: 64px;
+      height: 1px;
+      background: var(--gold);
+      margin: 0 auto 24px;
+      opacity: 0;
+      animation: expandLine 1s 0.9s forwards;
+    }
+
+    .hero-tags {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--off-white-muted);
+      opacity: 0;
+      animation: fadeUp 1s 1.1s forwards;
+    }
+
+    .hero-tags span {
+      margin: 0 12px;
+      color: var(--gold-dim);
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      opacity: 0;
+      animation: fadeUp 1s 1.5s forwards;
+    }
+
+    .hero-scroll-line {
+      width: 1px;
+      height: 48px;
+      background: linear-gradient(to bottom, var(--gold), transparent);
+      margin: 0 auto 8px;
+      animation: scrollPulse 2s infinite;
+    }
+
+    .hero-scroll-text {
+      font-family: var(--font-mono);
+      font-size: 0.55rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--off-white-muted);
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes expandLine {
+      from { opacity: 0; width: 0; }
+      to { opacity: 1; width: 64px; }
+    }
+
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.4; }
+      50% { opacity: 1; }
+    }
+
+    /* ============================================
+       PROFILE / PHILOSOPHY
+       ============================================ */
+    .profile {
+      background: var(--charcoal);
+    }
+
+    .profile-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .profile-bio h3 {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: 1.3rem;
+      color: var(--off-white);
+      margin-bottom: 20px;
+    }
+
+    .profile-bio p {
+      font-size: 0.9rem;
+      color: var(--off-white-dim);
+      line-height: 2;
+      margin-bottom: 16px;
+    }
+
+    .career-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 24px;
+    }
+
+    .career-tag {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border: 1px solid rgba(201, 168, 76, 0.2);
+      color: var(--gold);
+      border-radius: 2px;
+    }
+
+    .profile-photo {
+      position: relative;
+      aspect-ratio: 3/4;
+      border-radius: 4px;
+      overflow: hidden;
+      /* IMAGE: Replace with actual profile photo
+         Example: background: url('assets/images/profile.jpg') center/cover no-repeat; */
+      background:
+        linear-gradient(135deg, var(--charcoal-light) 0%, var(--black) 50%, var(--charcoal-light) 100%);
+    }
+
+    .profile-photo::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 40% 40%, rgba(201, 168, 76, 0.08), transparent 60%);
+    }
+
+    .profile-photo::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 0%, rgba(10, 10, 10, 0.4) 100%);
+      pointer-events: none;
+    }
+
+    /* Philosophy */
+    .philosophy {
+      margin-top: 80px;
+      padding-top: 80px;
+      border-top: 1px solid rgba(201, 168, 76, 0.1);
+    }
+
+    .philosophy-quote {
+      font-family: var(--font-display);
+      font-size: clamp(1.6rem, 3.5vw, 2.8rem);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--off-white);
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto 48px;
+      line-height: 1.4;
+    }
+
+    .philosophy-quote::before {
+      content: '"';
+      display: block;
+      font-size: 3rem;
+      color: var(--gold);
+      margin-bottom: 16px;
+    }
+
+    .concept-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .concept-card {
+      padding: 40px 32px;
+      background: var(--black);
+      border: 1px solid rgba(201, 168, 76, 0.1);
+      border-radius: 4px;
+      text-align: center;
+      transition: border-color 0.4s ease, transform 0.4s ease;
+    }
+
+    .concept-card:hover {
+      border-color: rgba(201, 168, 76, 0.3);
+      transform: translateY(-4px);
+    }
+
+    .concept-card-title {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 400;
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+
+    .concept-card-text {
+      font-size: 0.85rem;
+      color: var(--off-white-dim);
+      line-height: 1.8;
+    }
+
+    /* ============================================
+       ECOSYSTEM
+       ============================================ */
+    .ecosystem-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+
+    .eco-card {
+      padding: 48px 32px;
+      background: var(--charcoal);
+      border: 1px solid rgba(201, 168, 76, 0.08);
+      border-radius: 4px;
+      transition: border-color 0.4s ease, transform 0.4s ease, box-shadow 0.4s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .eco-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .eco-card:hover {
+      border-color: rgba(201, 168, 76, 0.2);
+      transform: translateY(-6px);
+      box-shadow: 0 24px 64px rgba(0, 0, 0, 0.4);
+    }
+
+    .eco-card:hover::before {
+      opacity: 1;
+    }
+
+    .eco-card-number {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      color: var(--gold-dim);
+      margin-bottom: 24px;
+    }
+
+    .eco-card-title {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      font-weight: 400;
+      color: var(--off-white);
+      margin-bottom: 16px;
+    }
+
+    .eco-card-desc {
+      font-size: 0.85rem;
+      color: var(--off-white-dim);
+      line-height: 1.9;
+      margin-bottom: 24px;
+    }
+
+    .eco-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .eco-tag {
+      font-family: var(--font-mono);
+      font-size: 0.55rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border: 1px solid rgba(240, 236, 228, 0.1);
+      color: var(--off-white-muted);
+      border-radius: 2px;
+      transition: border-color 0.3s ease, color 0.3s ease;
+    }
+
+    .eco-card:hover .eco-tag {
+      border-color: rgba(201, 168, 76, 0.2);
+      color: var(--off-white-dim);
+    }
+
+    /* ============================================
+       CASE STUDIES
+       ============================================ */
+    .cases {
+      background: var(--charcoal);
+    }
+
+    .case-item {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+      padding: 64px 0;
+      border-bottom: 1px solid rgba(201, 168, 76, 0.06);
+    }
+
+    .case-item:last-child {
+      border-bottom: none;
+    }
+
+    .case-item:nth-child(even) .case-visual {
+      order: 2;
+    }
+
+    .case-item:nth-child(even) .case-info {
+      order: 1;
+    }
+
+    .case-visual {
+      position: relative;
+      aspect-ratio: 16/10;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    /* IMAGE: Replace each .case-visual-N with actual project images
+       Example: .case-visual-1 { background: url('assets/images/case-01.jpg') center/cover; } */
+    .case-visual-1 {
+      background: linear-gradient(135deg, #1a1510 0%, #2a2015 30%, #1a1510 60%, #0f0d0a 100%);
+    }
+
+    .case-visual-2 {
+      background: linear-gradient(135deg, #0f1015 0%, #151a25 30%, #0f1015 60%, #0a0a0f 100%);
+    }
+
+    .case-visual-3 {
+      background: linear-gradient(135deg, #101510 0%, #152015 30%, #101510 60%, #0a0f0a 100%);
+    }
+
+    .case-visual-4 {
+      background: linear-gradient(135deg, #15100f 0%, #251a15 30%, #15100f 60%, #0f0a0a 100%);
+    }
+
+    .case-visual::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 50%, rgba(201, 168, 76, 0.06), transparent 70%);
+    }
+
+    .case-visual::after {
+      content: attr(data-label);
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: var(--font-mono);
+      font-size: 0.55rem;
+      letter-spacing: 0.3em;
+      color: rgba(201, 168, 76, 0.15);
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .case-number {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      margin-bottom: 16px;
+    }
+
+    .case-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.4rem, 2.5vw, 2rem);
+      font-weight: 300;
+      color: var(--off-white);
+      margin-bottom: 8px;
+    }
+
+    .case-subtitle {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--gold);
+      margin-bottom: 20px;
+    }
+
+    .case-desc {
+      font-size: 0.88rem;
+      color: var(--off-white-dim);
+      line-height: 1.9;
+      margin-bottom: 20px;
+    }
+
+    .case-meta {
+      display: flex;
+      gap: 24px;
+    }
+
+    .case-meta-item {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--off-white-muted);
+    }
+
+    .case-meta-item strong {
+      color: var(--off-white-dim);
+      font-weight: 400;
+    }
+
+    /* Case clickable & expand */
+    .case-item {
+      cursor: pointer;
+      transition: background 0.3s ease;
+      border-radius: 4px;
+      padding-left: 24px;
+      padding-right: 24px;
+    }
+
+    .case-item:hover {
+      background: rgba(201, 168, 76, 0.02);
+    }
+
+    .case-expand-hint {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold-dim);
+      margin-top: 16px;
+      transition: color 0.3s ease;
+    }
+
+    .case-item:hover .case-expand-hint {
+      color: var(--gold);
+    }
+
+    .case-expand-hint .arrow {
+      display: inline-block;
+      transition: transform 0.3s ease;
+    }
+
+    .case-item.expanded .case-expand-hint .arrow {
+      transform: rotate(180deg);
+    }
+
+    .case-detail {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                  opacity 0.4s ease;
+      opacity: 0;
+    }
+
+    .case-item.expanded .case-detail {
+      max-height: 600px;
+      opacity: 1;
+    }
+
+    .case-detail-inner {
+      padding-top: 20px;
+      border-top: 1px solid rgba(201, 168, 76, 0.08);
+      margin-top: 16px;
+    }
+
+    .case-detail-text {
+      font-size: 0.85rem;
+      color: var(--off-white-dim);
+      line-height: 2;
+      margin-bottom: 12px;
+    }
+
+    .case-detail-highlights {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .case-highlight {
+      padding: 10px 18px;
+      background: rgba(201, 168, 76, 0.06);
+      border: 1px solid rgba(201, 168, 76, 0.12);
+      border-radius: 3px;
+    }
+
+    .case-highlight-label {
+      font-family: var(--font-mono);
+      font-size: 0.55rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold-dim);
+      margin-bottom: 4px;
+    }
+
+    .case-highlight-value {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      color: var(--off-white);
+    }
+
+    /* Additional case visual gradients */
+    .case-visual-5 {
+      background: linear-gradient(135deg, #15130f 0%, #252015 30%, #15130f 60%, #0f0d0a 100%);
+    }
+
+    .case-visual-6 {
+      background: linear-gradient(135deg, #0f0f15 0%, #15152a 30%, #0f0f15 60%, #0a0a0f 100%);
+    }
+
+    .case-visual-7 {
+      background: linear-gradient(135deg, #151010 0%, #2a1515 30%, #151010 60%, #0f0a0a 100%);
+    }
+
+    .case-visual-8 {
+      background: linear-gradient(135deg, #0f1510 0%, #15251a 30%, #0f1510 60%, #0a0f0a 100%);
+    }
+
+    /* ============================================
+       TEAM
+       ============================================ */
+    .team-statement {
+      font-family: var(--font-display);
+      font-size: clamp(1.6rem, 3.5vw, 2.6rem);
+      font-weight: 300;
+      text-align: center;
+      color: var(--off-white);
+      max-width: 700px;
+      margin: 0 auto 20px;
+      line-height: 1.4;
+    }
+
+    .team-desc {
+      text-align: center;
+      max-width: 640px;
+      margin: 0 auto 56px;
+      font-size: 0.9rem;
+      color: var(--off-white-dim);
+      line-height: 1.9;
+    }
+
+    .team-domains {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .team-domain {
+      text-align: center;
+      padding: 32px 16px;
+      border: 1px solid rgba(201, 168, 76, 0.08);
+      border-radius: 4px;
+      transition: border-color 0.4s ease;
+    }
+
+    .team-domain:hover {
+      border-color: rgba(201, 168, 76, 0.25);
+    }
+
+    .team-domain-icon {
+      font-size: 1.4rem;
+      margin-bottom: 12px;
+      opacity: 0.6;
+    }
+
+    .team-domain-name {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+
+    .team-domain-detail {
+      font-size: 0.78rem;
+      color: var(--off-white-muted);
+      line-height: 1.6;
+    }
+
+    .team-company {
+      text-align: center;
+      margin-top: 56px;
+      padding-top: 40px;
+      border-top: 1px solid rgba(201, 168, 76, 0.08);
+    }
+
+    .team-company-name {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      font-weight: 400;
+      color: var(--off-white);
+      margin-bottom: 8px;
+    }
+
+    .team-company-desc {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--off-white-muted);
+    }
+
+    /* ============================================
+       OFFERINGS
+       ============================================ */
+    .offerings {
+      margin-bottom: 80px;
+    }
+
+    .offerings-lead {
+      font-family: var(--font-display);
+      font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+      font-weight: 300;
+      color: var(--off-white);
+      margin-bottom: 12px;
+    }
+
+    .offerings-sub {
+      font-size: 0.88rem;
+      color: var(--off-white-dim);
+      max-width: 640px;
+      line-height: 1.9;
+      margin-bottom: 40px;
+    }
+
+    .offerings-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .offering-item {
+      padding: 28px 24px;
+      border: 1px solid rgba(201, 168, 76, 0.08);
+      border-radius: 4px;
+      transition: border-color 0.4s ease, transform 0.3s ease;
+      position: relative;
+    }
+
+    .offering-item:hover {
+      border-color: rgba(201, 168, 76, 0.25);
+      transform: translateY(-3px);
+    }
+
+    .offering-number {
+      font-family: var(--font-mono);
+      font-size: 0.55rem;
+      letter-spacing: 0.2em;
+      color: var(--gold-dim);
+      margin-bottom: 14px;
+    }
+
+    .offering-title {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 400;
+      color: var(--off-white);
+      margin-bottom: 6px;
+    }
+
+    .offering-title-jp {
+      font-size: 0.75rem;
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+
+    .offering-desc {
+      font-size: 0.78rem;
+      color: var(--off-white-muted);
+      line-height: 1.7;
+    }
+
+    .offering-for {
+      font-family: var(--font-mono);
+      font-size: 0.55rem;
+      letter-spacing: 0.08em;
+      color: var(--gold-dim);
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px solid rgba(201, 168, 76, 0.06);
+    }
+
+    /* ============================================
+       CONTACT
+       ============================================ */
+    .contact {
+      background: var(--charcoal);
+    }
+
+    .contact-divider {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .contact-divider-text {
+      font-family: var(--font-display);
+      font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+      font-weight: 300;
+      color: var(--off-white);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .contact-card {
+      padding: 36px 24px;
+      background: var(--black);
+      border: 1px solid rgba(201, 168, 76, 0.08);
+      border-radius: 4px;
+      text-align: center;
+      transition: border-color 0.4s ease, transform 0.4s ease;
+      display: block;
+    }
+
+    .contact-card:hover {
+      border-color: rgba(201, 168, 76, 0.3);
+      transform: translateY(-4px);
+    }
+
+    .contact-card-icon {
+      font-size: 1.5rem;
+      margin-bottom: 16px;
+      opacity: 0.5;
+    }
+
+    .contact-card-title {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 400;
+      color: var(--off-white);
+      margin-bottom: 8px;
+    }
+
+    .contact-card-desc {
+      font-size: 0.75rem;
+      color: var(--off-white-muted);
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+
+    .contact-card-cta {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      transition: color 0.3s ease;
+    }
+
+    .contact-card:hover .contact-card-cta {
+      color: var(--off-white);
+    }
+
+    /* ============================================
+       FOOTER
+       ============================================ */
+    .footer {
+      padding: 40px 0;
+      border-top: 1px solid rgba(201, 168, 76, 0.06);
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-copy {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      color: var(--off-white-muted);
+    }
+
+    .footer-back {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--off-white-muted);
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+
+    .footer-back:hover {
+      color: var(--gold);
+    }
+
+    /* ============================================
+       MOBILE RESPONSIVE
+       ============================================ */
+    @media (max-width: 1024px) {
+      .ecosystem-grid {
+        grid-template-columns: 1fr;
+        max-width: 560px;
+      }
+
+      .case-item {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+
+      .case-item:nth-child(even) .case-visual,
+      .case-item:nth-child(even) .case-info {
+        order: unset;
+      }
+
+      .offerings-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .contact-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .team-domains {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .offerings-grid {
+        grid-template-columns: 1fr;
+        max-width: 480px;
+      }
+
+      .nav-links {
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 280px;
+        height: 100vh;
+        background: rgba(10, 10, 10, 0.98);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 28px;
+        transform: translateX(100%);
+        transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      }
+
+      .nav-links.open {
+        transform: translateX(0);
+      }
+
+      .hamburger {
+        display: flex;
+      }
+
+      .profile-grid {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+
+      .profile-photo {
+        max-width: 320px;
+        margin: 0 auto;
+      }
+
+      .concept-cards {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-grid {
+        grid-template-columns: 1fr;
+        max-width: 400px;
+      }
+
+      .team-domains {
+        grid-template-columns: 1fr;
+        max-width: 320px;
+        margin: 0 auto;
+      }
+
+      .case-meta {
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        gap: 16px;
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero-title {
+        font-size: 2.2rem;
+      }
+
+      .hero-subtitle {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================
+       NAVIGATION
+       ============================================ -->
+  <nav class="nav" id="nav">
+    <a href="#hero" class="nav-logo">A<span>.</span>S</a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#profile" data-nav>Profile</a></li>
+      <li><a href="#ecosystem" data-nav>Ecosystem</a></li>
+      <li><a href="#cases" data-nav>Cases</a></li>
+      <li><a href="#team" data-nav>Team</a></li>
+      <li><a href="#contact" data-nav>Contact</a></li>
+    </ul>
+    <div class="hamburger" id="hamburger" aria-label="メニュー" role="button" tabindex="0">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </nav>
+
+  <!-- ============================================
+       HERO
+       ============================================ -->
+  <section class="hero" id="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <p class="hero-label">Founder / Artist / Philosopher</p>
+      <h1 class="hero-title">Akihiko Shimoyama</h1>
+      <p class="hero-subtitle">Sculpting the <em>Society.</em></p>
+      <div class="hero-gold-line"></div>
+      <p class="hero-tags">Business<span>×</span>Art<span>×</span>Philosophy</p>
+    </div>
+    <div class="hero-scroll">
+      <div class="hero-scroll-line"></div>
+      <span class="hero-scroll-text">Scroll</span>
+    </div>
+  </section>
+
+  <!-- ============================================
+       PROFILE / PHILOSOPHY
+       ============================================ -->
+  <section class="section profile" id="profile">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="label">01 — Profile</span>
+        <div class="gold-line"></div>
+        <h2 class="heading-lg">思想を社会実装する</h2>
+      </div>
+
+      <div class="profile-grid">
+        <div class="profile-bio reveal reveal-delay-1">
+          <h3>下山 明彦 — Akihiko Shimoyama</h3>
+          <p>
+            東京大学教養学部卒業。東京藝術大学大学院修了。慶應義塾大学大学院 政策・メディア研究科 博士課程在籍。
+          </p>
+          <p>
+            Senjin Holdings 代表として、ビジネス・アート・哲学を横断する複合的な事業を展開。大阪万博ASEANパビリオン、経済産業省大臣室常設アート、日ASEANサミット外交アートなど、国家規模のプロジェクトを手がける。
+          </p>
+          <p>
+            Forbes 30 UNDER 30 JAPAN 2025に選出。Global Shapers Community（世界経済フォーラム）メンバー。「社会彫刻家」として既存の境界を再定義し続けている。
+          </p>
+          <div class="career-tags">
+            <span class="career-tag">東京大学</span>
+            <span class="career-tag">東京藝術大学</span>
+            <span class="career-tag">慶應 博士課程</span>
+            <span class="career-tag">Senjin Holdings</span>
+            <span class="career-tag">Forbes 30 Under 30</span>
+            <span class="career-tag">Global Shapers / WEF</span>
+          </div>
+        </div>
+
+        <!-- IMAGE: Replace div below with <img src="assets/images/profile.jpg" alt="下山明彦"> -->
+        <div class="profile-photo reveal reveal-delay-2" role="img" aria-label="下山明彦 プロフィール写真"></div>
+      </div>
+
+      <!-- Philosophy -->
+      <div class="philosophy reveal">
+        <p class="philosophy-quote">
+          1万年残るシンボルを創る
+        </p>
+        <div class="concept-cards">
+          <div class="concept-card reveal reveal-delay-1">
+            <h4 class="concept-card-title">知覚の最大化</h4>
+            <p class="concept-card-text">
+              人間の知覚を拡張し、見えないものを可視化する。アートとテクノロジーの交差点で、新しい認知の回路を設計する。
+            </p>
+          </div>
+          <div class="concept-card reveal reveal-delay-2">
+            <h4 class="concept-card-title">密度 × 時間</h4>
+            <p class="concept-card-text">
+              短期的な効率ではなく、時間軸を超えた密度で価値を測る。1万年のスケールで意味を持つ仕事を志向する。
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       ECOSYSTEM
+       ============================================ -->
+  <section class="section" id="ecosystem">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="label">02 — Ecosystem</span>
+        <div class="gold-line"></div>
+        <h2 class="heading-lg">三つの領域が交差する場所</h2>
+      </div>
+
+      <div class="ecosystem-grid">
+        <div class="eco-card reveal reveal-delay-1">
+          <span class="eco-card-number">01</span>
+          <h3 class="eco-card-title">Growth</h3>
+          <p class="eco-card-desc">
+            学生起業から約6億円EXITを実現。2社目のSenjin Holdingsは120名規模・国内外8拠点に成長。事業の立ち上げからEXITまでを設計する。
+          </p>
+          <div class="eco-tags">
+            <span class="eco-tag">事業構築</span>
+            <span class="eco-tag">EXIT戦略</span>
+            <span class="eco-tag">AI開発</span>
+            <span class="eco-tag">マーケティング</span>
+            <span class="eco-tag">M&A</span>
+          </div>
+        </div>
+
+        <div class="eco-card reveal reveal-delay-2">
+          <span class="eco-card-number">02</span>
+          <h3 class="eco-card-title">Social Art</h3>
+          <p class="eco-card-desc">
+            思想を物質化し、社会に実装する。組織の文化を彫刻し、対話を通じて新しい価値の地層を形成する。
+          </p>
+          <div class="eco-tags">
+            <span class="eco-tag">思想の物質化</span>
+            <span class="eco-tag">組織開発</span>
+            <span class="eco-tag">対話型鑑賞</span>
+            <span class="eco-tag">文化設計</span>
+          </div>
+        </div>
+
+        <div class="eco-card reveal reveal-delay-3">
+          <span class="eco-card-number">03</span>
+          <h3 class="eco-card-title">Local</h3>
+          <p class="eco-card-desc">
+            地域の固有性を再発見し、世界とつなぐ。行政と民間の架け橋となり、持続可能なコミュニティを共創する。
+          </p>
+          <div class="eco-tags">
+            <span class="eco-tag">地方創生</span>
+            <span class="eco-tag">官民連携</span>
+            <span class="eco-tag">コミュニティデザイン</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       CASE STUDIES
+       ============================================ -->
+  <section class="section cases" id="cases">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="label">03 — Case Studies</span>
+        <div class="gold-line"></div>
+        <h2 class="heading-lg">実装の記録</h2>
+      </div>
+
+      <!-- Case 01: 万博 -->
+      <div class="case-item reveal" data-case>
+        <!-- IMAGE: Replace with actual project image -->
+        <div class="case-visual case-visual-1" data-label="Expo 2025 Osaka"></div>
+        <div class="case-info">
+          <span class="case-number">Case 01 — Art</span>
+          <h3 class="case-title">大阪万博 "one."</h3>
+          <p class="case-subtitle">ASEAN Pavilion</p>
+          <p class="case-desc">
+            2025年大阪・関西万博のASEANパビリオンにて、10カ国の多様性を一つに統合するアート作品「one.」を制作。国家間の対話を視覚的シンボルとして結晶化した。
+          </p>
+          <div class="case-meta">
+            <span class="case-meta-item"><strong>Year:</strong> 2025</span>
+            <span class="case-meta-item"><strong>Scope:</strong> Art Direction / Installation</span>
+          </div>
+          <p class="case-expand-hint">View Details <span class="arrow">↓</span></p>
+          <div class="case-detail">
+            <div class="case-detail-inner">
+              <p class="case-detail-text">
+                大阪・関西万博2025のASEANパビリオンに展示されたアート作品《one.》。ASEAN加盟10カ国それぞれの文化・歴史・アイデンティティをリサーチし、多様性の中に通底する「ひとつ」の原理を視覚化した。作品制作にあたり各国大使館と協議を重ね、外交的配慮と芸術的表現の両立を実現。万博という国際舞台で、アートが国家間対話の触媒となりうることを証明した。
+              </p>
+              <div class="case-detail-highlights">
+                <div class="case-highlight">
+                  <div class="case-highlight-label">Scale</div>
+                  <div class="case-highlight-value">10カ国統合</div>
+                </div>
+                <div class="case-highlight">
+                  <div class="case-highlight-label">Venue</div>
+                  <div class="case-highlight-value">大阪・関西万博</div>
+                </div>
+                <div class="case-highlight">
+                  <div class="case-highlight-label">Role</div>
+                  <div class="case-highlight-value">総合演出・制作</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Case 02: 経産省 -->
+      <div class="case-item reveal" data-case>
+        <!-- IMAGE: Replace with actual project image -->
+        <div class="case-visual case-visual-2" data-label="METI Art Thinking"></div>
+        <div class="case-info">
+          <span class="case-number">Case 02 — Art × Policy</span>
+          <h3 class="case-title">経済産業省 × Art Thinking</h3>
+          <p class="case-subtitle">大臣室常設アート</p>
+          <p class="case-desc">
+            経済産業省の政策立案プロセスにアート思考を導入。大臣室に常設されるアート作品の制作を通じて、行政とクリエイティブの新しい関係性を構築した。
+          </p>
+          <div class="case-meta">
+            <span class="case-meta-item"><strong>Year:</strong> 2023–</span>
+            <span class="case-meta-item"><strong>Scope:</strong> Art Production / Consulting</span>
+          </div>
+          <p class="case-expand-hint">View Details <span class="arrow">↓</span></p>
+          <div class="case-detail">
+            <div class="case-detail-inner">
+              <p class="case-detail-text">
+                経済産業省が推進する「アート思考」の政策的実装に参画。省内の調査研究報告書の作成に携わるとともに、大臣室に常設されるアート作品を献呈した。官僚組織の意思決定プロセスにアート的視座を組み込むという前例のない取り組みであり、政策とクリエイティブの接点を制度レベルで構築した。この活動は、経産省「アートと経済社会について考える研究会」の報告書にも反映されている。
+              </p>
+              <div class="case-detail-highlights">
+                <div class="case-highlight">
+                  <div class="case-highlight-label">Client</div>
+                  <div class="case-highlight-value">経済産業省</div>
+                </div>
+                <div class="case-highlight">
+                  <div class="case-highlight-label">Output</div>
+                  <div class="case-highlight-value">常設アート＋調査報告書</div>
+                </div>
+                <div class="case-highlight">
+                  <div class="case-highlight-label">Impact</div>
+                  <div class="case-highlight-value">政策立案への実装</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Case 03: 西川町 -->
+      <div class="case-item reveal" data-case>
+        <!-- IMAGE: Replace with actual project image -->
+        <div class="case-visual case-visual-3" data-label="Nishikawa Kyokan"></div>
+        <div class="case-info">
+          <span class="case-number">Case 03 — Art × Local</span>
+          <h3 class="case-title">山形県西川町「響環」</h3>
+          <p class="case-subtitle">巨大シンボルアート</p>
+          <p class="case-desc">
+            人口5,000人の山間の町に、地域の記憶と未来を接続する巨大シンボルアートを設置。住民との対話を重ね、町のアイデンティティを再彫刻した。
+          </p>
+          <div class="case-meta">
+            <span class="case-meta-item"><strong>Year:</strong> 2024</span>
+            <span class="case-meta-item"><strong>Scope:</strong> Public Art / Community Design</span>
+          </div>
+          <p class="case-expand-hint">View Details <span class="arrow">↓</span></p>
+          <div class="case-detail">
+            <div class="case-detail-inner">
+              <p class="case-detail-text">
+                山形県西川町の依頼により、月山の麓に位置するこの町のシンボルとなる巨大アート作品「響環」を制作。住民ワークショップを複数回開催し、町の歴史・文化・自然環境を丹念にリサーチした上で、土地の記憶を未来へ接続するコンセプトを設計。過疎化が進む中山間地域において、アートが地域のアイデンティティを再定義し、住民の誇りを喚起する装置として機能することを実証した。
+              </p>
+              <div class="case-detail-highlights">
+                <div class="case-highlight">
+                  <div class="case-highlight-label">Population</div>
+                  <div class="case-highlight-value">約5,000人</div>
+                </div>
+                <div class="case-highlight">
+                  <div class="case-highlight-label">Process</div>
+                  <div class="case-highlight-value">住民参加型</div>
+                </div>
+                <div class="case-highlight">
+                  <div class="case-highlight-label">Type</div>
+                  <div class="case-highlight-value">パブリックアート</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Case 04: 日ASEAN -->
+      <div class="case-item reveal" data-case>
+        <!-- IMAGE: Replace with actual project image -->
+        <div class="case-visual case-visual-4" data-label="Japan-ASEAN Summit"></div>
+        <div class="case-info">
+          <span class="case-number">Case 04 — Art × Diplomacy</span>
+          <h3 class="case-title">日ASEANサミット</h3>
+          <p class="case-subtitle">外交アート</p>
+          <p class="case-desc">
+            日ASEAN特別首脳会議における外交の場で、各国首脳に向けたアート作品を制作。芸術を通じた国際対話の新しいプロトコルを提示した。
+          </p>
+          <div class="case-meta">
+            <span class="case-meta-item"><strong>Year:</strong> 2023</span>
+            <span class="case-meta-item"><strong>Scope:</strong> Diplomatic Art / Production</span>
+          </div>
+          <p class="case-expand-hint">View Details <span class="arrow">↓</span></p>
+          <div class="case-detail">
+            <div class="case-detail-inner">
+              <p class="case-detail-text">
+                日ASEAN友好協力50周年を記念した特別首脳会議において、各国首脳へ贈呈するアート作品を制作。外交プロトコルの制約の中で、芸術が持つ普遍的なコミュニケーション力を最大限に活かした表現を設計した。同時にASEAN-Japan Generation Z Leaders Community（AJZL）の日本代表として、次世代の日ASEAN関係構築に向けた政策提言にも参画。アートと外交を架橋する稀有な実践例となった。
+              </p>
+              <div class="case-detail-highlights">
+                <div class="case-highlight">
+                  <div class="case-highlight-label">Occasion</div>
+                  <div class="case-highlight-value">友好50周年記念</div>
+                </div>
+                <div class="case-highlight">
+                  <div class="case-highlight-label">Recipients</div>
+                  <div class="case-highlight-value">各国首脳</div>
+                </div>
+                <div class="case-highlight">
+                  <div class="case-highlight-label">Role</div>
+                  <div class="case-highlight-value">制作＋AJZL日本代表</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Case 05: CoinOtaku EXIT -->
+      <div class="case-item reveal" data-case>
+        <!-- IMAGE: Replace with actual project image -->
+        <div class="case-visual case-visual-5" data-label="CoinOtaku EXIT"></div>
+        <div class="case-info">
+          <span class="case-number">Case 05 — Business</span>
+          <h3 class="case-title">CoinOtaku</h3>
+          <p class="case-subtitle">東大発メディア事業 → 約6億円EXIT</p>
+          <p class="case-desc">
+            東京大学在学中に仮想通貨メディア「CoinOtaku」を創業。半年で月間100万PV・月利1,000万円超に成長させ、東証二部上場企業に売却。
+          </p>
+          <div class="case-meta">
+            <span class="case-meta-item"><strong>Year:</strong> 2017–2020</span>
+            <span class="case-meta-item"><strong>Scope:</strong> 創業 / メディア運営 / M&A</span>
+          </div>
+          <p class="case-expand-hint">View Details <span class="arrow">↓</span></p>
+          <div class="case-detail">
+            <div class="case-detail-inner">
+              <p class="case-detail-text">
+                2017年、東京大学在学中に仮想通貨情報メディア「CoinOtaku」を創業。暗号資産市場の急成長を捉え、わずか半年で月間100万PV・月利1,000万円超の収益基盤を構築した。独自の分析コンテンツとコミュニティ運営により、国内有数の暗号資産メディアへ成長。
+              </p>
+              <p class="case-detail-text">
+                2020年、東証二部上場のBeat Holdings Limited（現・FingerMotion）に約6億円で事業譲渡（個人持分47.9%）。学生起業からのEXITという稀有な実績を達成し、起業家としての基盤を確立した。
+              </p>
+              <div class="case-detail-highlights">
+                <div class="case-highlight">
+                  <div class="case-highlight-label">Exit Value</div>
+                  <div class="case-highlight-value">約6億円</div>
+                </div>
+                <div class="case-highlight">
+                  <div class="case-highlight-label">Growth</div>
+                  <div class="case-highlight-value">半年で月間100万PV</div>
+                </div>
+                <div class="case-highlight">
+                  <div class="case-highlight-label">Acquirer</div>
+                  <div class="case-highlight-value">東証二部上場企業</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Case 06: Senjin Holdings -->
+      <div class="case-item reveal" data-case>
+        <!-- IMAGE: Replace with actual project image -->
+        <div class="case-visual case-visual-6" data-label="Senjin Holdings"></div>
+        <div class="case-info">
+          <span class="case-number">Case 06 — Business</span>
+          <h3 class="case-title">Senjin Holdings</h3>
+          <p class="case-subtitle">AI × マーケティング × アート — 多角経営</p>
+          <p class="case-desc">
+            2019年に2社目として創業。AI Marketing・AI Development・Art・Incubationの4事業を展開し、従業員約120名・国内外8拠点の規模に成長。
+          </p>
+          <div class="case-meta">
+            <span class="case-meta-item"><strong>Year:</strong> 2019–</span>
+            <span class="case-meta-item"><strong>Scope:</strong> 経営 / AI / マーケティング / アート</span>
+          </div>
+          <p class="case-expand-hint">View Details <span class="arrow">↓</span></p>
+          <div class="case-detail">
+            <div class="case-detail-inner">
+              <p class="case-detail-text">
+                CoinOtakuのEXIT後、「ビジネス×アート×哲学」の統合を体現する企業としてSenjin Holdingsを設立。自社で20以上のAIエージェントを開発・運用し、獲得特化のAIグロース事業を中核に据える。アート事業では国家プロジェクト級の大型案件を手がけ、インキュベーション事業では次世代の起業家育成にも取り組む。
+              </p>
+              <p class="case-detail-text" style="font-weight:400; color: var(--off-white); margin-top: 20px; margin-bottom: 8px;">
+                — AI Marketing Solutions
+              </p>
+              <p class="case-detail-text">
+                <strong style="color: var(--gold);">第一想起取れるくん®</strong> — 1,000以上のSNSアカウント群からTikTok等に同時多発的にオーガニック投稿。AIがリアルタイムで分析・改善し、検索表示を占有する認知獲得エンジン。<br>
+                <strong style="color: var(--gold);">獲得取れるくん®</strong> — 初期費用0円の成果報酬型広告運用代行。YouTube・TikTok・Meta・LINE等で動画広告を中心に配信し、AIが24時間最適化。<br>
+                <strong style="color: var(--gold);">獲得鍛えるくん®</strong> — 広告代理店依存から脱却するためのインハウスマーケティング組織構築支援。3〜4ヶ月で自走化を実現する密着型プログラム。
+              </p>
+              <p class="case-detail-text" style="font-weight:400; color: var(--off-white); margin-top: 20px; margin-bottom: 8px;">
+                — AI Development Solutions
+              </p>
+              <p class="case-detail-text">
+                <strong style="color: var(--gold);">自力でSaaS作れるくん®</strong> — 非エンジニアでも3日間でカスタムSaaSを開発できるAI内製化支援プログラム。<br>
+                自社プロダクトとして AI Script Generator、インハウスクラウド、Ad Cockpit、Marketing Diagnosis Bot 等を開発・運用。最短1ヶ月でクライアント向けカスタムAI開発も提供。
+              </p>
+              <div class="case-detail-highlights">
+                <div class="case-highlight">
+                  <div class="case-highlight-label">Team</div>
+                  <div class="case-highlight-value">約120名</div>
+                </div>
+                <div class="case-highlight">
+                  <div class="case-highlight-label">AI Agents</div>
+                  <div class="case-highlight-value">20以上を自社開発</div>
+                </div>
+                <div class="case-highlight">
+                  <div class="case-highlight-label">Domains</div>
+                  <div class="case-highlight-value">AI / Marketing / Art / Incubation</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Case 07: Forbes 30 UNDER 30 -->
+      <div class="case-item reveal" data-case>
+        <!-- IMAGE: Replace with actual project image -->
+        <div class="case-visual case-visual-7" data-label="Forbes 30 Under 30"></div>
+        <div class="case-info">
+          <span class="case-number">Case 07 — Recognition</span>
+          <h3 class="case-title">Forbes 30 UNDER 30 JAPAN</h3>
+          <p class="case-subtitle">BUSINESS & FINANCE & IMPACT & LOCAL 部門選出</p>
+          <p class="case-desc">
+            Forbes JAPAN「30 UNDER 30 JAPAN 2025」に選出。ビジネス・ファイナンス・インパクト・ローカルの複数領域にまたがる評価を受ける。
+          </p>
+          <div class="case-meta">
+            <span class="case-meta-item"><strong>Year:</strong> 2025</span>
+            <span class="case-meta-item"><strong>Scope:</strong> Award / Recognition</span>
+          </div>
+          <p class="case-expand-hint">View Details <span class="arrow">↓</span></p>
+          <div class="case-detail">
+            <div class="case-detail-inner">
+              <p class="case-detail-text">
+                Forbes JAPANが次世代を牽引する30歳未満のイノベーターを選出する「30 UNDER 30 JAPAN 2025」に選ばれた。事業構築力（Business & Finance）、社会的インパクト（Impact）、地方創生（Local）の複数カテゴリにわたる評価は、ビジネスとアートと社会を横断する活動の独自性が認められた証左である。
+              </p>
+              <p class="case-detail-text">
+                その他、Bloomberg Global Investment Contests 2017での最高収益獲得、キャリア・インカレ2016初代総合優勝、Global Shapers Community（世界経済フォーラム）Tokyo Hubメンバーなど、ビジネス・金融・社会起業の各領域で評価を得ている。
+              </p>
+              <div class="case-detail-highlights">
+                <div class="case-highlight">
+                  <div class="case-highlight-label">Forbes</div>
+                  <div class="case-highlight-value">30 UNDER 30</div>
+                </div>
+                <div class="case-highlight">
+                  <div class="case-highlight-label">WEF</div>
+                  <div class="case-highlight-value">Global Shapers</div>
+                </div>
+                <div class="case-highlight">
+                  <div class="case-highlight-label">Bloomberg</div>
+                  <div class="case-highlight-value">最高収益獲得</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Case 08: 地方創生拠点 -->
+      <div class="case-item reveal" data-case>
+        <!-- IMAGE: Replace with actual project image -->
+        <div class="case-visual case-visual-8" data-label="Regional Expansion"></div>
+        <div class="case-info">
+          <span class="case-number">Case 08 — Local × Business</span>
+          <h3 class="case-title">地方創生拠点展開</h3>
+          <p class="case-subtitle">福岡・岩国・天草・阿武 — 地域と共に事業を創る</p>
+          <p class="case-desc">
+            福岡支社を含め、山口県岩国市・熊本県天草市・山口県阿武町に相次いでオフィスを開設。地方自治体との連携協定を締結し、IT人材の地方移転と雇用創出を推進。
+          </p>
+          <div class="case-meta">
+            <span class="case-meta-item"><strong>Year:</strong> 2022–2025</span>
+            <span class="case-meta-item"><strong>Scope:</strong> 地方創生 / 拠点開発 / 官民連携</span>
+          </div>
+          <p class="case-expand-hint">View Details <span class="arrow">↓</span></p>
+          <div class="case-detail">
+            <div class="case-detail-inner">
+              <p class="case-detail-text">
+                都市一極集中ではなく、地方の固有価値と事業成長を両立させるモデルを追求。福岡支社を九州のハブ拠点として設置し、2022年12月には山口県岩国市と進出協定を締結しオフィスを開設。2023年4月には熊本県天草市と立地協定を結び、2025年5月には山口県阿武町にも新拠点を開設。各地で地域の行政・企業と連携し、IT・クリエイティブ人材の地方移転と新規雇用を実現している。
+              </p>
+              <p class="case-detail-text">
+                単なるサテライトオフィスではなく、地域コミュニティとの協働を通じて、その土地ならではの事業機会を発掘。地方創生を「コスト削減」ではなく「価値創造」として再定義するアプローチを実践している。
+              </p>
+              <div class="case-detail-highlights">
+                <div class="case-highlight">
+                  <div class="case-highlight-label">Fukuoka</div>
+                  <div class="case-highlight-value">九州ハブ拠点</div>
+                </div>
+                <div class="case-highlight">
+                  <div class="case-highlight-label">Iwakuni</div>
+                  <div class="case-highlight-value">2022年12月〜</div>
+                </div>
+                <div class="case-highlight">
+                  <div class="case-highlight-label">Amakusa</div>
+                  <div class="case-highlight-value">2023年4月〜</div>
+                </div>
+                <div class="case-highlight">
+                  <div class="case-highlight-label">Abu</div>
+                  <div class="case-highlight-value">2025年5月〜</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       TEAM
+       ============================================ -->
+  <section class="section" id="team">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="label">04 — The Team</span>
+        <div class="gold-line"></div>
+      </div>
+
+      <h2 class="team-statement reveal">
+        異才の融合が、<br>世界を加速させる
+      </h2>
+
+      <p class="team-desc reveal">
+        テクノロジー、アート、アカデミア、行政——異なる専門領域のプロフェッショナルが集結し、既存のフレームワークでは解けない課題に挑む。
+      </p>
+
+      <div class="team-domains reveal">
+        <div class="team-domain reveal-delay-1">
+          <div class="team-domain-icon">⚡</div>
+          <div class="team-domain-name">Tech</div>
+          <p class="team-domain-detail">AI・Web3<br>プロダクト開発</p>
+        </div>
+        <div class="team-domain reveal-delay-2">
+          <div class="team-domain-icon">◆</div>
+          <div class="team-domain-name">Art</div>
+          <p class="team-domain-detail">現代美術<br>空間デザイン</p>
+        </div>
+        <div class="team-domain reveal-delay-3">
+          <div class="team-domain-icon">◯</div>
+          <div class="team-domain-name">Academia</div>
+          <p class="team-domain-detail">哲学・認知科学<br>政策研究</p>
+        </div>
+        <div class="team-domain reveal-delay-4">
+          <div class="team-domain-icon">■</div>
+          <div class="team-domain-name">Government</div>
+          <p class="team-domain-detail">行政連携<br>制度設計</p>
+        </div>
+      </div>
+
+      <div class="team-company reveal">
+        <p class="team-company-name">Senjin Holdings</p>
+        <p class="team-company-desc">Business × Art × Philosophy</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       CONTACT
+       ============================================ -->
+  <section class="section contact" id="contact">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="label">05 — Contact</span>
+        <div class="gold-line"></div>
+        <h2 class="heading-lg">Let's Sculpt Together.</h2>
+      </div>
+
+      <!-- Offerings -->
+      <div class="offerings reveal">
+        <h3 class="offerings-lead">What I Can Offer</h3>
+        <p class="offerings-sub">
+          事業のEXIT経験、国家規模のアートプロジェクト、AI×マーケティングの実践知——<br>
+          異なる領域を横断してきた経験を、あなたの課題に接続します。
+        </p>
+
+        <div class="offerings-grid">
+          <div class="offering-item reveal reveal-delay-1">
+            <span class="offering-number">01</span>
+            <h4 class="offering-title">Strategic Advisory</h4>
+            <p class="offering-title-jp">事業戦略・EXIT設計</p>
+            <p class="offering-desc">学生起業から約6億円EXITの実体験に基づく事業戦略設計。成長フェーズの見極め、M&A準備、資金調達戦略まで。</p>
+            <p class="offering-for">→ 経営者 / スタートアップ創業者</p>
+          </div>
+
+          <div class="offering-item reveal reveal-delay-2">
+            <span class="offering-number">02</span>
+            <h4 class="offering-title">AI × Growth</h4>
+            <p class="offering-title-jp">AI活用の事業成長支援</p>
+            <p class="offering-desc">20以上のAIエージェントを自社開発・運用してきた知見で、AIを活用した認知獲得・広告運用・業務自動化を設計。</p>
+            <p class="offering-for">→ 事業会社 / D2C / スタートアップ</p>
+          </div>
+
+          <div class="offering-item reveal reveal-delay-3">
+            <span class="offering-number">03</span>
+            <h4 class="offering-title">Art Thinking</h4>
+            <p class="offering-title-jp">アート思考による変革</p>
+            <p class="offering-desc">経産省大臣室へのアート導入実績。組織の意思決定にアート的視座を組み込み、ブランドの世界観を根本から設計し直す。</p>
+            <p class="offering-for">→ 経営者 / ブランド責任者 / 行政</p>
+          </div>
+
+          <div class="offering-item reveal reveal-delay-1">
+            <span class="offering-number">04</span>
+            <h4 class="offering-title">Creative Direction</h4>
+            <p class="offering-title-jp">総合演出・作品制作</p>
+            <p class="offering-desc">万博パビリオン、外交の場、地域のシンボル——空間・体験・メッセージを統合するクリエイティブディレクション。</p>
+            <p class="offering-for">→ 自治体 / 企業 / 国際機関</p>
+          </div>
+
+          <div class="offering-item reveal reveal-delay-2">
+            <span class="offering-number">05</span>
+            <h4 class="offering-title">Career Mentoring</h4>
+            <p class="offering-title-jp">キャリア戦略・越境の設計</p>
+            <p class="offering-desc">東大→藝大→起業→EXIT→哲学博士課程。異分野を横断するキャリアの設計法、専門性の掛け合わせ方、発信戦略を壁打ち。</p>
+            <p class="offering-for">→ インフルエンサー / 専門家 / 起業志望者</p>
+          </div>
+
+          <div class="offering-item reveal reveal-delay-3">
+            <span class="offering-number">06</span>
+            <h4 class="offering-title">Regional Innovation</h4>
+            <p class="offering-title-jp">地方創生・官民連携</p>
+            <p class="offering-desc">福岡・岩国・天草・阿武での拠点展開実績。IT人材の地方移転、自治体との連携協定、アートによる地域再定義。</p>
+            <p class="offering-for">→ 自治体首長 / 地域金融機関 / 企業</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contact Cards -->
+      <div class="contact-divider reveal">
+        <div class="gold-line" style="margin: 0 auto 20px;"></div>
+        <p class="contact-divider-text">Get in Touch</p>
+      </div>
+
+      <div class="contact-grid">
+        <a href="mailto:hello@example.com?subject=Business%20Partnership" class="contact-card reveal reveal-delay-1">
+          <!-- EMAIL: Replace hello@example.com with actual email address -->
+          <div class="contact-card-icon">◇</div>
+          <h3 class="contact-card-title">Business</h3>
+          <p class="contact-card-desc">事業提携・協業・戦略顧問のご相談</p>
+          <span class="contact-card-cta">Get in Touch →</span>
+        </a>
+
+        <a href="mailto:hello@example.com?subject=Art%20Commission" class="contact-card reveal reveal-delay-2">
+          <!-- EMAIL: Replace hello@example.com with actual email address -->
+          <div class="contact-card-icon">△</div>
+          <h3 class="contact-card-title">Art Commission</h3>
+          <p class="contact-card-desc">アート制作・空間演出・展示のご依頼</p>
+          <span class="contact-card-cta">Get in Touch →</span>
+        </a>
+
+        <a href="mailto:hello@example.com?subject=Advisory%20%2F%20Mentoring" class="contact-card reveal reveal-delay-3">
+          <!-- EMAIL: Replace hello@example.com with actual email address -->
+          <div class="contact-card-icon">⬡</div>
+          <h3 class="contact-card-title">Advisory</h3>
+          <p class="contact-card-desc">キャリア相談・越境戦略・専門性の掛け算についてのディスカッション</p>
+          <span class="contact-card-cta">Book a Session →</span>
+        </a>
+
+        <a href="mailto:hello@example.com?subject=Investment%20Inquiry" class="contact-card reveal reveal-delay-1">
+          <!-- EMAIL: Replace hello@example.com with actual email address -->
+          <div class="contact-card-icon">○</div>
+          <h3 class="contact-card-title">Investment</h3>
+          <p class="contact-card-desc">出資・資金調達・M&Aのご相談</p>
+          <span class="contact-card-cta">Get in Touch →</span>
+        </a>
+
+        <a href="mailto:hello@example.com?subject=Speaking%20%2F%20Media" class="contact-card reveal reveal-delay-2">
+          <!-- EMAIL: Replace hello@example.com with actual email address -->
+          <div class="contact-card-icon">▽</div>
+          <h3 class="contact-card-title">Speaking / Media</h3>
+          <p class="contact-card-desc">講演・登壇・取材・対談のご依頼</p>
+          <span class="contact-card-cta">Get in Touch →</span>
+        </a>
+
+        <a href="mailto:hello@example.com?subject=Career%20Inquiry" class="contact-card reveal reveal-delay-3">
+          <!-- EMAIL: Replace hello@example.com with actual email address -->
+          <div class="contact-card-icon">□</div>
+          <h3 class="contact-card-title">Careers</h3>
+          <p class="contact-card-desc">Senjin Holdingsへの参画・採用</p>
+          <span class="contact-card-cta">Get in Touch →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       FOOTER
+       ============================================ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <span class="footer-copy">&copy; 2026 Akihiko Shimoyama. All rights reserved.</span>
+        <a href="#hero" class="footer-back">Back to Top ↑</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============================================
+       JAVASCRIPT
+       ============================================ -->
+  <script>
+    (function () {
+      'use strict';
+
+      // ---- Intersection Observer: Scroll Reveal ----
+      const revealElements = document.querySelectorAll('.reveal');
+
+      const revealObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              revealObserver.unobserve(entry.target);
+            }
+          });
+        },
+        {
+          threshold: 0.15,
+          rootMargin: '0px 0px -40px 0px',
+        }
+      );
+
+      revealElements.forEach((el) => revealObserver.observe(el));
+
+      // ---- Navigation: Scroll Background ----
+      const nav = document.getElementById('nav');
+      let lastScroll = 0;
+
+      function onScroll() {
+        const scrollY = window.scrollY;
+        if (scrollY > 80) {
+          nav.classList.add('scrolled');
+        } else {
+          nav.classList.remove('scrolled');
+        }
+        lastScroll = scrollY;
+      }
+
+      window.addEventListener('scroll', onScroll, { passive: true });
+
+      // ---- Navigation: Active Section Highlight ----
+      const sections = document.querySelectorAll('section[id]');
+      const navLinks = document.querySelectorAll('[data-nav]');
+
+      const sectionObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const id = entry.target.getAttribute('id');
+              navLinks.forEach((link) => {
+                link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+              });
+            }
+          });
+        },
+        {
+          threshold: 0.3,
+          rootMargin: '-20% 0px -60% 0px',
+        }
+      );
+
+      sections.forEach((section) => sectionObserver.observe(section));
+
+      // ---- Hamburger Menu ----
+      const hamburger = document.getElementById('hamburger');
+      const navLinksEl = document.getElementById('navLinks');
+      const body = document.body;
+
+      function openMenu() {
+        const scrollY = window.scrollY;
+        body.classList.add('menu-open');
+        body.style.top = '-' + scrollY + 'px';
+        hamburger.classList.add('open');
+        navLinksEl.classList.add('open');
+      }
+
+      function closeMenu() {
+        const scrollY = Math.abs(parseInt(body.style.top || '0', 10));
+        hamburger.classList.remove('open');
+        navLinksEl.classList.remove('open');
+        body.classList.remove('menu-open');
+        body.style.top = '';
+        window.scrollTo(0, scrollY);
+      }
+
+      function toggleMenu() {
+        if (navLinksEl.classList.contains('open')) {
+          closeMenu();
+        } else {
+          openMenu();
+        }
+      }
+
+      hamburger.addEventListener('click', toggleMenu);
+
+      hamburger.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          toggleMenu();
+        }
+      });
+
+      // Close menu on nav link click (mobile)
+      navLinksEl.querySelectorAll('a').forEach((link) => {
+        link.addEventListener('click', () => {
+          if (navLinksEl.classList.contains('open')) closeMenu();
+        });
+      });
+
+      // Close menu on outside click
+      document.addEventListener('click', (e) => {
+        if (
+          navLinksEl.classList.contains('open') &&
+          !navLinksEl.contains(e.target) &&
+          !hamburger.contains(e.target)
+        ) {
+          closeMenu();
+        }
+      });
+
+      // Close menu on Escape
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && navLinksEl.classList.contains('open')) closeMenu();
+      });
+
+      // ---- Case Studies: Click to Expand ----
+      document.querySelectorAll('[data-case]').forEach((caseItem) => {
+        caseItem.addEventListener('click', (e) => {
+          // Don't toggle if clicking a link inside
+          if (e.target.closest('a')) return;
+          caseItem.classList.toggle('expanded');
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
